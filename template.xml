@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<student>
-    <name></name>
-    <dateOfBirth></dateOfBirth>
-    <grade>
-        <subject></subject>
-        <mark></mark>
-    </grade>
-</student>
+<class>
+    <student>
+        <name></name>
+        <dateOfBirth></dateOfBirth>
+        <grade>
+            <subject></subject>
+            <mark></mark>
+        </grade>
+    </student>
+</class>
 <!-- The application will allow you to manage students and their grades.
 Each student will have a single name & date of birth element, while their can
 be multiple grade elements, which contain a subject and mark element.-->

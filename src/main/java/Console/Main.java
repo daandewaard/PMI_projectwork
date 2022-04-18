@@ -1,10 +1,12 @@
 package Console;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException {
         boolean wantsToContinue = true;
         while(wantsToContinue){
             Scanner choiceInput = new Scanner(System.in);
@@ -20,7 +22,7 @@ public class Main {
 
             switch(choice){
                 case "1":
-                    System.out.println("1");
+                    showStudents();
                     break;
                 case "2":
                     System.out.println("2");
@@ -40,6 +42,15 @@ public class Main {
                     break;
             }
 
+        }
+
+    }
+
+    private static void showStudents() throws ParserConfigurationException {
+        ArrayList<String[]> students = Xml.getStudents();
+
+        for(int i = 0; i < students.size(); i++){
+            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
         }
 
     }

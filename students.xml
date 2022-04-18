@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class>
+    <student>
+        <name>Angelo van der Meijden</name>
+        <dateOfBirth>14-03-1999</dateOfBirth>
+        <grade>
+            <subject>Calculus</subject>
+            <mark>1</mark>
+        </grade>
+    </student>
+    <student>
+        <name>Bart de Vries</name>
+        <dateOfBirth>20-10-2003</dateOfBirth>
+        <grade>
+            <subject>Calculus</subject>
+            <mark>4</mark>
+        </grade>
+    </student>
+</class>
