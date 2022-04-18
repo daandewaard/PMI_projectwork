@@ -15,5 +15,9 @@
             <subject>Calculus</subject>
             <mark>4</mark>
         </grade>
+        <grade>
+            <subject>Programming</subject>
+            <mark>3</mark>
+        </grade>
     </student>
 </class>

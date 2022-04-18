@@ -13,7 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class Xml {
     private static final String FILENAME = "students.xml";
@@ -37,11 +36,16 @@ public class Xml {
         }
         return doc;
     }
-    public static ArrayList<String[]> getStudents() throws ParserConfigurationException {
+    public static NodeList studentsList() throws ParserConfigurationException {
+        Document doc = getXmlDocument();
+
+        return doc.getElementsByTagName("student");
+    }
+
+    public static ArrayList<String[]> getStudentInfo() throws ParserConfigurationException {
         ArrayList<String[]> students = new ArrayList<String[]>();
 
-        Document doc = getXmlDocument();
-        NodeList studentsList = doc.getElementsByTagName("student");
+        NodeList studentsList = studentsList();
 
         for(int i = 0; i < studentsList.getLength(); i++){
             Node node = studentsList.item(i);
@@ -54,5 +58,37 @@ public class Xml {
         }
 
         return students;
+    }
+
+    public static ArrayList<String[]> getStudentGrades(int choice) throws ParserConfigurationException {
+        NodeList studentsList = studentsList();
+        Node student = studentsList.item(choice);
+        NodeList studentGrades = student.getChildNodes();
+
+        ArrayList<String[]> grades = new ArrayList<String[]>();
+
+        for(int i = 0; i < studentGrades.getLength(); i++){
+            //System.out.println(studentGrades.item(choice).toString());
+            Node node = studentGrades.item(i);
+            NodeList childNodes = node.getChildNodes();
+            String subject = "";
+            String mark = "";
+            boolean isGrade = false;
+            for(int j = 0; j < childNodes.getLength(); j++){
+                if(childNodes.item(j).getNodeName().equals("mark")){
+                    mark = childNodes.item(j).getTextContent();
+                    isGrade = true;
+                }
+                if(childNodes.item(j).getNodeName().equals("subject")){
+                    subject = childNodes.item(j).getTextContent();
+                }
+
+            }
+            if(isGrade){
+                grades.add(new String[]{subject, mark});
+            }
+        }
+
+        return grades;
     }
 }

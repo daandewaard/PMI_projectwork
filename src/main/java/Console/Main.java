@@ -2,14 +2,15 @@ package Console;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner choiceInput = new Scanner(System.in);
 
     public static void main(String[] args) throws ParserConfigurationException {
         boolean wantsToContinue = true;
         while(wantsToContinue){
-            Scanner choiceInput = new Scanner(System.in);
             System.out.println("Welcome, please select what you would like to do");
             System.out.println("1: Show student information");
             System.out.println("2: Edit or remove student");
@@ -47,10 +48,22 @@ public class Main {
     }
 
     private static void showStudents() throws ParserConfigurationException {
-        ArrayList<String[]> students = Xml.getStudents();
+        ArrayList<String[]> students = Xml.getStudentInfo();
 
         for(int i = 0; i < students.size(); i++){
             System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+        }
+        System.out.println("Please type the number of the student you would like to see the grades of");
+        System.out.println("Or type 'x' to return to the previous menu");
+
+        String choice = choiceInput.nextLine();
+        if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")){
+            int intChoice = Integer.parseInt(choice);
+            ArrayList<String[]> grades = Xml.getStudentGrades(intChoice - 1);
+
+            for(int i = 0; i < grades.size(); i++){
+                System.out.println(grades.get(i)[0] + ": " + grades.get(i)[1]);
+            }
         }
 
     }
