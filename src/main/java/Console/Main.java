@@ -32,7 +32,7 @@ public class Main {
                     System.out.println("3");
                     break;
                 case "4":
-                    System.out.println("4");
+                    createStudent();
                     break;
                 case "x":
                 case "X":
@@ -47,6 +47,17 @@ public class Main {
 
     }
 
+    private static void createStudent() throws ParserConfigurationException {
+        System.out.println("Please enter the name of the student");
+        String name = choiceInput.nextLine();
+
+        System.out.println("Please enter the date of birth of the student in the following format: ");
+        System.out.println("28-07-2002");
+        String dob = choiceInput.nextLine();
+
+        Xml.createStudent(name, dob);
+    }
+
     private static void showStudents() throws ParserConfigurationException {
         ArrayList<String[]> students = Xml.getStudentInfo();
 
@@ -57,13 +68,16 @@ public class Main {
         System.out.println("Or type 'x' to return to the previous menu");
 
         String choice = choiceInput.nextLine();
-        if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")){
+        if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")) {
             int intChoice = Integer.parseInt(choice);
             ArrayList<String[]> grades = Xml.getStudentGrades(intChoice - 1);
 
-            for(int i = 0; i < grades.size(); i++){
+            for (int i = 0; i < grades.size(); i++) {
                 System.out.println(grades.get(i)[0] + ": " + grades.get(i)[1]);
             }
+            System.out.println("Press enter to return to the previous menu");
+            choice = choiceInput.nextLine();
+            showStudents();
         }
 
     }

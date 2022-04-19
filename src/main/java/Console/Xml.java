@@ -11,6 +11,9 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
@@ -90,5 +93,47 @@ public class Xml {
         }
 
         return grades;
+    }
+
+    public static void createStudent(String name, String dob) throws ParserConfigurationException {
+        try {
+            File xmlFile = new File("students.xml");
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(xmlFile);
+
+            Element documentElement = document.getDocumentElement();
+
+            Element textNode = document.createElement("name");
+            textNode.setTextContent(name);
+
+            Element textNode1 = document.createElement("dateOfBirth");
+            textNode1.setTextContent(dob);
+
+            Element nodeElement = document.createElement("student");
+
+            nodeElement.appendChild(textNode);
+            nodeElement.appendChild(textNode1);
+
+            documentElement.appendChild(nodeElement);
+            document.replaceChild(documentElement, documentElement);
+
+            document.getDocumentElement().normalize();
+
+            Transformer tFormer =
+                    TransformerFactory.newInstance().newTransformer();
+
+            tFormer.setOutputProperty(OutputKeys.METHOD, "xml");
+
+            Source source = new DOMSource(document);
+            Result result = new StreamResult(xmlFile);
+
+            tFormer.transform(source, result);
+
+            System.out.println("Succesfully added new student " + name);
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 }

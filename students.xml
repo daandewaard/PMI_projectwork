@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<class>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><class>
     <student>
         <name>Angelo van der Meijden</name>
         <dateOfBirth>14-03-1999</dateOfBirth>
@@ -20,4 +19,12 @@
             <mark>3</mark>
         </grade>
     </student>
-</class>
+    <student>
+        <name>Henk de Groot</name>
+        <dateOfBirth>12-02-2000</dateOfBirth>
+    </student>
+    <student>
+        <name>Jeff Veenman</name>
+        <dateOfBirth>01-10-2003</dateOfBirth>
+    </student>
+<student><name>Mark Erikse</name><dateOfBirth>01-02-1999</dateOfBirth></student></class>
