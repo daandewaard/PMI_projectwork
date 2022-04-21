@@ -1,5 +1,6 @@
 package Console;
 
+import java.io.*;
 import java.util.ArrayList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,8 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
+import javax.xml.transform.stream.StreamSource;
 
 public class Xml {
     private static final String FILENAME = "students.xml";
@@ -101,6 +101,7 @@ public class Xml {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(xmlFile);
+            NodeList studentsList = studentsList();
 
             Element documentElement = document.getDocumentElement();
 
@@ -111,6 +112,13 @@ public class Xml {
             textNode1.setTextContent(dob);
 
             Element nodeElement = document.createElement("student");
+
+            /*This isn't the perfect solution yet, will cause problems when a student in the middle of the file
+            gets deleted. Need to look into this, should find the id of the student at the end of the file,
+            or save the most recent id in some kind of file (so that id's will never be re-used)
+             */
+
+            nodeElement.setAttribute("id", String.valueOf(studentsList.getLength() + 1));
 
             nodeElement.appendChild(textNode);
             nodeElement.appendChild(textNode1);
@@ -136,4 +144,54 @@ public class Xml {
             System.out.println(ex);
         }
     }
+
+    public static void editStudent(String id, String name, String dob) throws ParserConfigurationException {
+        Document doc = getXmlDocument();
+        NodeList studentsList = doc.getElementsByTagName("student");
+
+        for (int i = 0; i < studentsList.getLength(); i++) {
+            Node student = studentsList.item(i);
+
+            String studentId = student.getAttributes().getNamedItem("id").getTextContent();
+            if(id.equals(studentId.trim())){
+                NodeList childNodes = student.getChildNodes();
+                for (int j = 0; j < childNodes.getLength(); j++) {
+                    Node item = childNodes.item(j);
+
+                    if("name".equalsIgnoreCase(item.getNodeName())){
+                        item.setTextContent(name);
+                    }
+                    if("dateOfBirth".equalsIgnoreCase(item.getNodeName())){
+                        item.setTextContent(dob);
+                    }
+                }
+            }
+        }
+        try (FileOutputStream output =
+                     new FileOutputStream("students.xml")) {
+            writeXml(doc, output);
+        }catch (IOException | TransformerException e) {
+            e.printStackTrace();
+    }}
+    private static void writeXml(Document doc,
+                                 OutputStream output)
+            throws TransformerException, UnsupportedEncodingException {
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+        // The default add many empty new line, not sure why?
+        // https://mkyong.com/java/pretty-print-xml-with-java-dom-and-xslt/
+         Transformer transformer = transformerFactory.newTransformer();
+
+        // pretty print
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
+
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(output);
+
+        transformer.transform(source, result);
+
+    }
+
 }

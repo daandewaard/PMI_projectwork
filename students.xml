@@ -1,30 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><class>
-    <student>
-        <name>Angelo van der Meijden</name>
-        <dateOfBirth>14-03-1999</dateOfBirth>
-        <grade>
-            <subject>Calculus</subject>
-            <mark>1</mark>
-        </grade>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<class>
+    <student id="1">
+        <name>Bert de Groot</name>
+        <dateOfBirth>10-03-1998</dateOfBirth>
     </student>
-    <student>
-        <name>Bart de Vries</name>
-        <dateOfBirth>20-10-2003</dateOfBirth>
-        <grade>
-            <subject>Calculus</subject>
-            <mark>4</mark>
-        </grade>
-        <grade>
-            <subject>Programming</subject>
-            <mark>3</mark>
-        </grade>
+    <student id="2">
+        <name>Henk Veenman</name>
+        <dateOfBirth>10-02-1999</dateOfBirth>
     </student>
-    <student>
-        <name>Henk de Groot</name>
-        <dateOfBirth>12-02-2000</dateOfBirth>
-    </student>
-    <student>
-        <name>Jeff Veenman</name>
-        <dateOfBirth>01-10-2003</dateOfBirth>
-    </student>
-<student><name>Mark Erikse</name><dateOfBirth>01-02-1999</dateOfBirth></student></class>
+</class>

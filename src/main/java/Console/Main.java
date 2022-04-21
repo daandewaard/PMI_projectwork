@@ -26,7 +26,7 @@ public class Main {
                     showStudents();
                     break;
                 case "2":
-                    System.out.println("2");
+                    editStudent();
                     break;
                 case "3":
                     System.out.println("3");
@@ -45,6 +45,27 @@ public class Main {
 
         }
 
+    }
+
+    private static void editStudent() throws ParserConfigurationException {
+        ArrayList<String[]> students = Xml.getStudentInfo();
+
+        for(int i = 0; i < students.size(); i++){
+            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+        }
+        System.out.println("Please type the number of the student you would like to edit");
+        System.out.println("Or type 'x' to return to the previous menu");
+        String choice = choiceInput.nextLine();
+        if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")) {
+            System.out.println("Please enter the new name for this student.");
+            String name = choiceInput.nextLine();
+
+            System.out.println("Please enter the new date of birth for this student.");
+            System.out.println("Format: 28-07-2002");
+            String dob = choiceInput.nextLine();
+
+            Xml.editStudent(choice, name, dob);
+        }
     }
 
     private static void createStudent() throws ParserConfigurationException {
