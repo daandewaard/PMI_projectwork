@@ -194,4 +194,34 @@ public class Xml {
 
     }
 
+    public static void addGrade(String id, String subject, String mark) throws ParserConfigurationException {
+        Document doc = getXmlDocument();
+        NodeList studentsList = doc.getElementsByTagName("student");
+
+        for (int i = 0; i < studentsList.getLength(); i++) {
+            Node student = studentsList.item(i);
+
+            String studentId = student.getAttributes().getNamedItem("id").getTextContent();
+            if(id.equals(studentId.trim())){
+
+                Element gradeElement = doc.createElement("grade");
+                Element subjectElement = doc.createElement("subject");
+                subjectElement.setTextContent(subject);
+
+                Element markEle = doc.createElement("mark");
+                markEle.setTextContent(mark);
+
+                gradeElement.appendChild(subjectElement);
+                gradeElement.appendChild(markEle);
+
+                student.appendChild(gradeElement);
+            }
+        }
+        try (FileOutputStream output =
+                     new FileOutputStream("students.xml")) {
+            writeXml(doc, output);
+        }catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
 }

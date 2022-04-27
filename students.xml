@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <class>
+            
+    
     <student id="1">
-        <name>Bert de Groot</name>
-        <dateOfBirth>10-03-1998</dateOfBirth>
+                        
+        
+        <name>Bart de Groot</name>
+                        
+        
+        <dateOfBirth>11-03-1999</dateOfBirth>
+                    
+    
+        <grade>
+            <subject>Programming</subject>
+            <mark>4</mark>
+        </grade>
     </student>
+            
+    
     <student id="2">
+                        
+        
         <name>Henk Veenman</name>
+                        
+        
         <dateOfBirth>10-02-1999</dateOfBirth>
+                    
+    
     </student>
+        
+
 </class>

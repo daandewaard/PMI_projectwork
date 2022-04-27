@@ -29,7 +29,7 @@ public class Main {
                     editStudent();
                     break;
                 case "3":
-                    System.out.println("3");
+                    addGrade();
                     break;
                 case "4":
                     createStudent();
@@ -45,6 +45,26 @@ public class Main {
 
         }
 
+    }
+
+    private static void addGrade() throws ParserConfigurationException {
+        ArrayList<String[]> students = Xml.getStudentInfo();
+
+        for(int i = 0; i < students.size(); i++){
+            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+        }
+        System.out.println("Please type the number of the student you would like to add a grade to");
+        System.out.println("Or type 'x' to return to the previous menu");
+        String choice = choiceInput.nextLine();
+        if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")) {
+            System.out.println("Please enter the name of the subject.");
+            String subject = choiceInput.nextLine();
+
+            System.out.println("Please enter the grade.");
+            String mark = choiceInput.nextLine();
+
+            Xml.addGrade(choice, subject, mark);
+        }
     }
 
     private static void editStudent() throws ParserConfigurationException {
