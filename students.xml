@@ -1,32 +1,189 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <class>
-            
+                                
+    
+    
+    
+    
+    
     
     <student id="1">
-                        
+                                                                
+        
+        
+        
+        
+        
         
         <name>Bart de Groot</name>
-                        
+                                                                
+        
+        
+        
+        
+        
         
         <dateOfBirth>11-03-1999</dateOfBirth>
-                    
+                                                            
     
+        
+        
+        
+        
+        
         <grade>
-            <subject>Programming</subject>
-            <mark>4</mark>
-        </grade>
-    </student>
+                                                                        
             
+            
+            
+            
+            <subject>Programming</subject>
+                                                                        
+            
+            
+            
+            
+            <mark>4</mark>
+                                                                    
+        
+        
+        
+        
+        </grade>
+                                            
+        
+        
+        
+        
+        <grade>
+                                                            
+            
+            
+            
+            <subject>Calculus</subject>
+                                                            
+            
+            
+            
+            <mark>2</mark>
+                                                        
+        
+        
+        
+        </grade>
+                                    
     
-    <student id="2">
-                        
+    
+    
+    </student>
+                                
+    
+    
+    
+    
+    
+    
+    <student id="3">
+                                                                
+        
+        
+        
+        
+        
         
         <name>Henk Veenman</name>
-                        
+                                                                
+        
+        
+        
+        
+        
         
         <dateOfBirth>10-02-1999</dateOfBirth>
-                    
+                                
+        
+        
+        <grade>
+                                                
+            
+            
+            <subject>Calculus</subject>
+                                                
+            
+            
+            <mark>2</mark>
+                                            
+        
+        
+        </grade>
+                                                            
     
+    
+    
+    
+    
+    
+    </student>
+                            
+
+
+
+
+    
+    
+    <student id="4">
+                        
+        
+        <name>Dan Bosmann</name>
+                        
+        
+        <dateOfBirth>28-07-1999</dateOfBirth>
+                        
+        
+        <grade>
+                                    
+            
+            <subject>English</subject>
+                                    
+            
+            <mark>5</mark>
+                                
+        
+        </grade>
+                        
+        
+        <grade>
+                                    
+            
+            <subject>English</subject>
+                                    
+            
+            <mark>5</mark>
+                                
+        
+        </grade>
+                        
+        
+        <grade>
+                                    
+            
+            <subject>English</subject>
+                                    
+            
+            <mark>5</mark>
+                                
+        
+        </grade>
+                    
+        
+        <grade>
+                        
+            <subject>Englihs</subject>
+                        
+            <mark>2</mark>
+                    
+        </grade>
+            
     </student>
         
 

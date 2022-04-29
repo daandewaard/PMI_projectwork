@@ -51,7 +51,7 @@ public class Main {
         ArrayList<String[]> students = Xml.getStudentInfo();
 
         for(int i = 0; i < students.size(); i++){
-            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+            System.out.println(students.get(i)[0] + ": " + students.get(i)[1] + ", " + students.get(i)[2]);
         }
         System.out.println("Please type the number of the student you would like to add a grade to");
         System.out.println("Or type 'x' to return to the previous menu");
@@ -71,7 +71,7 @@ public class Main {
         ArrayList<String[]> students = Xml.getStudentInfo();
 
         for(int i = 0; i < students.size(); i++){
-            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+            System.out.println((students.get(i)[0]) + ": " + students.get(i)[1] + ", " + students.get(i)[2]);
         }
         System.out.println("Please type the number of the student you would like to edit");
         System.out.println("Or type 'x' to return to the previous menu");
@@ -103,7 +103,7 @@ public class Main {
         ArrayList<String[]> students = Xml.getStudentInfo();
 
         for(int i = 0; i < students.size(); i++){
-            System.out.println((i + 1) + ": " + students.get(i)[0] + ", " + students.get(i)[1]);
+            System.out.println((students.get(i)[0]) + ": " + students.get(i)[1] + ", " + students.get(i)[2]);
         }
         System.out.println("Please type the number of the student you would like to see the grades of");
         System.out.println("Or type 'x' to return to the previous menu");

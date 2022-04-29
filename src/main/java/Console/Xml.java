@@ -15,7 +15,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 public class Xml {
     private static final String FILENAME = "students.xml";
@@ -55,9 +54,10 @@ public class Xml {
 
             Element element = (Element) node;
 
+            String id = element.getAttributes().getNamedItem("id").getTextContent();
             String name = element.getElementsByTagName("name").item(0).getTextContent();
             String dob = element.getElementsByTagName("dateOfBirth").item(0).getTextContent();
-            students.add(new String[]{name, dob});
+            students.add(new String[]{id, name, dob});
         }
 
         return students;
@@ -65,29 +65,38 @@ public class Xml {
 
     public static ArrayList<String[]> getStudentGrades(int choice) throws ParserConfigurationException {
         NodeList studentsList = studentsList();
-        Node student = studentsList.item(choice);
+        //Node student = studentsList.item(choice);
+        Node student = null;
+        for (int i = 0; i < studentsList.getLength(); i++) {
+            student = studentsList.item(i);
+            int studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
+            if (studentId == choice + 1) {
+                break;
+            }
+        }
+        assert student != null;
         NodeList studentGrades = student.getChildNodes();
 
         ArrayList<String[]> grades = new ArrayList<String[]>();
 
-        for(int i = 0; i < studentGrades.getLength(); i++){
+        for (int j = 0; j < studentGrades.getLength(); j++) {
             //System.out.println(studentGrades.item(choice).toString());
-            Node node = studentGrades.item(i);
+            Node node = studentGrades.item(j);
             NodeList childNodes = node.getChildNodes();
             String subject = "";
             String mark = "";
             boolean isGrade = false;
-            for(int j = 0; j < childNodes.getLength(); j++){
-                if(childNodes.item(j).getNodeName().equals("mark")){
-                    mark = childNodes.item(j).getTextContent();
+            for (int k = 0; k < childNodes.getLength(); k++) {
+                if (childNodes.item(k).getNodeName().equals("mark")) {
+                    mark = childNodes.item(k).getTextContent();
                     isGrade = true;
                 }
-                if(childNodes.item(j).getNodeName().equals("subject")){
-                    subject = childNodes.item(j).getTextContent();
+                if (childNodes.item(k).getNodeName().equals("subject")) {
+                    subject = childNodes.item(k).getTextContent();
                 }
 
             }
-            if(isGrade){
+            if (isGrade) {
                 grades.add(new String[]{subject, mark});
             }
         }
@@ -117,8 +126,15 @@ public class Xml {
             gets deleted. Need to look into this, should find the id of the student at the end of the file,
             or save the most recent id in some kind of file (so that id's will never be re-used)
              */
+            String studentId = "";
+            for (int i = 0; i < studentsList.getLength(); i++) {
+                Node student = studentsList.item(i);
+                if(i == studentsList().getLength() - 1){
+                    studentId = student.getAttributes().getNamedItem("id").getTextContent();
+                }
+            }
 
-            nodeElement.setAttribute("id", String.valueOf(studentsList.getLength() + 1));
+            nodeElement.setAttribute("id", String.valueOf(Integer.parseInt(studentId) + 1));
 
             nodeElement.appendChild(textNode);
             nodeElement.appendChild(textNode1);
@@ -148,12 +164,17 @@ public class Xml {
     public static void editStudent(String id, String name, String dob) throws ParserConfigurationException {
         Document doc = getXmlDocument();
         NodeList studentsList = doc.getElementsByTagName("student");
-
+        Node student = null;
+        int studentId = 0;
         for (int i = 0; i < studentsList.getLength(); i++) {
-            Node student = studentsList.item(i);
+            student = studentsList.item(i);
+            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
+            if (studentId == Integer.parseInt(id) + 1) {
+                break;
+            }
+        }
+        assert student != null;
 
-            String studentId = student.getAttributes().getNamedItem("id").getTextContent();
-            if(id.equals(studentId.trim())){
                 NodeList childNodes = student.getChildNodes();
                 for (int j = 0; j < childNodes.getLength(); j++) {
                     Node item = childNodes.item(j);
@@ -165,8 +186,8 @@ public class Xml {
                         item.setTextContent(dob);
                     }
                 }
-            }
-        }
+
+
         try (FileOutputStream output =
                      new FileOutputStream("students.xml")) {
             writeXml(doc, output);
@@ -197,26 +218,26 @@ public class Xml {
     public static void addGrade(String id, String subject, String mark) throws ParserConfigurationException {
         Document doc = getXmlDocument();
         NodeList studentsList = doc.getElementsByTagName("student");
-
+        Node student = null;
+        int studentId = 0;
         for (int i = 0; i < studentsList.getLength(); i++) {
-            Node student = studentsList.item(i);
-
-            String studentId = student.getAttributes().getNamedItem("id").getTextContent();
-            if(id.equals(studentId.trim())){
-
-                Element gradeElement = doc.createElement("grade");
-                Element subjectElement = doc.createElement("subject");
-                subjectElement.setTextContent(subject);
-
-                Element markEle = doc.createElement("mark");
-                markEle.setTextContent(mark);
-
-                gradeElement.appendChild(subjectElement);
-                gradeElement.appendChild(markEle);
-
-                student.appendChild(gradeElement);
+            student = studentsList.item(i);
+            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
+            if (studentId == Integer.parseInt(id) + 1) {
+                break;
             }
         }
+        assert student != null;
+
+        Element gradeElement = doc.createElement("grade");
+        Element subjectElement = doc.createElement("subject");
+        subjectElement.setTextContent(subject);
+        Element markEle = doc.createElement("mark");
+        markEle.setTextContent(mark);
+        gradeElement.appendChild(subjectElement);
+        gradeElement.appendChild(markEle);
+        student.appendChild(gradeElement);
+
         try (FileOutputStream output =
                      new FileOutputStream("students.xml")) {
             writeXml(doc, output);
