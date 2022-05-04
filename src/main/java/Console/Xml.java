@@ -223,7 +223,7 @@ public class Xml {
         for (int i = 0; i < studentsList.getLength(); i++) {
             student = studentsList.item(i);
             studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
-            if (studentId == Integer.parseInt(id) + 1) {
+            if (studentId == Integer.parseInt(id)) {
                 break;
             }
         }
@@ -237,6 +237,31 @@ public class Xml {
         gradeElement.appendChild(subjectElement);
         gradeElement.appendChild(markEle);
         student.appendChild(gradeElement);
+
+        try (FileOutputStream output =
+                     new FileOutputStream("students.xml")) {
+            writeXml(doc, output);
+        }catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteStudent(String choice) throws ParserConfigurationException {
+        Document doc = getXmlDocument();
+        NodeList studentsList = doc.getElementsByTagName("student");
+        Node student = null;
+        int studentId = 0;
+        for (int i = 0; i < studentsList.getLength(); i++) {
+            student = studentsList.item(i);
+            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
+            if (studentId == Integer.parseInt(choice)) {
+                break;
+            }
+        }
+        assert student != null;
+
+        student.getParentNode().removeChild(student);
+
 
         try (FileOutputStream output =
                      new FileOutputStream("students.xml")) {

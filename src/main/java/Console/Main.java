@@ -77,14 +77,19 @@ public class Main {
         System.out.println("Or type 'x' to return to the previous menu");
         String choice = choiceInput.nextLine();
         if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")) {
-            System.out.println("Please enter the new name for this student.");
+            System.out.println("Please enter the new name for this student, or type 'remove' to delete this student.");
             String name = choiceInput.nextLine();
 
-            System.out.println("Please enter the new date of birth for this student.");
-            System.out.println("Format: 28-07-2002");
-            String dob = choiceInput.nextLine();
+            if(!Objects.equals(name, "remove") && (!Objects.equals(name, "Remove"))){
+                System.out.println("Please enter the new date of birth for this student.");
+                System.out.println("Format: 28-07-2002");
+                String dob = choiceInput.nextLine();
 
-            Xml.editStudent(choice, name, dob);
+                Xml.editStudent(choice, name, dob);
+            }
+            else{
+                Xml.deleteStudent(choice);
+            }
         }
     }
 
