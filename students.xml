@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <class>
-                                                    
+                                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -13,7 +23,17 @@
     
     
     <student id="1">
-                                                                                                        
+                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -26,7 +46,7 @@
         
         
         <name>Bart de Groot</name>
-                                                                                                        
+                                                                                                                                                                                        
         
         
         
@@ -38,8 +58,18 @@
         
         
         
-        <dateOfBirth>11-03-1999</dateOfBirth>
-                                                                                                    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <dateOfBirth>11-04-1999</dateOfBirth>
+                                                                                                                                                                                    
     
         
         
@@ -51,8 +81,28 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <grade>
-                                                                                                                                    
+                                                                                                                                                                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
@@ -63,7 +113,17 @@
             
             
             <subject>Programming</subject>
-                                                                                                                                    
+                                                                                                                                                                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
@@ -74,7 +134,17 @@
             
             
             <mark>4</mark>
-                                                                                                                                
+                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -85,7 +155,17 @@
         
         
         </grade>
-                                                                                    
+                                                                                                                                                                    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -96,7 +176,17 @@
         
         
         <grade>
-                                                                                                                        
+                                                                                                                                                                                                                                                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
@@ -106,7 +196,17 @@
             
             
             <subject>Calculus</subject>
-                                                                                                                        
+                                                                                                                                                                                                                                                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
@@ -116,7 +216,17 @@
             
             
             <mark>2</mark>
-                                                                                                                    
+                                                                                                                                                                                                                                            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -126,7 +236,17 @@
         
         
         </grade>
-                                                                            
+                                                                                                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -136,7 +256,7 @@
     
     
     </student>
-                                                    
+                                                                                            
     
     
     
@@ -148,34 +268,72 @@
     
     
     
-    <student id="3">
-                                                                                                        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <name>Henk vEenman</name>
-                                                                                                        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <dateOfBirth>29-20-2001</dateOfBirth>
+    
+    
+    
+    
+    
+    
+    
                                                                         
+
+
+
+
+    
+    
+    
+        
+
+
+
+
+    
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <student id="5">
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <name>Erik Veldman</name>
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <dateOfBirth>10-01-2000</dateOfBirth>
+                                                                                                        
+        
+        
+        
+        
         
         
         
@@ -184,7 +342,7 @@
         
         
         <grade>
-                                                                                                            
+                                                                                                                                                            
             
             
             
@@ -192,8 +350,12 @@
             
             
             
-            <subject>Calculus</subject>
-                                                                                                            
+            
+            
+            
+            
+            <subject>Programming</subject>
+                                                                                                                                                            
             
             
             
@@ -201,8 +363,16 @@
             
             
             
-            <mark>2</mark>
-                                                                                                        
+            
+            
+            
+            
+            <mark>4</mark>
+                                                                                                                                                        
+        
+        
+        
+        
         
         
         
@@ -221,39 +391,12 @@
     
     
     
-    
-    
-    </student>
-                                                
-
-
-
-
-    
-    
-    
         
-
-
-
-
-    
-    
-        
-    
-    <student id="5">
-                        
-        
-        <name>Bas van Veen</name>
-                        
-        
-        <dateOfBirth>39</dateOfBirth>
-                        
         
         <grade>
                                     
             
-            <subject>Programming</subject>
+            <subject>Discrete Maths</subject>
                                     
             
             <mark>4</mark>
@@ -263,6 +406,36 @@
                     
     
     </student>
-        
+                                                
 
+
+
+
+
+
+
+
+
+
+    
+    <student id="6">
+                
+        <name>Henk</name>
+                
+        <dateOfBirth>10</dateOfBirth>
+            
+    </student>
+        
+    <student id="7">
+                
+        <name>Test van der Marel</name>
+                
+        <dateOfBirth>31-12-2000</dateOfBirth>
+            
+        <grade>
+            <subject>Discrete Maths II</subject>
+            <mark>5</mark>
+        </grade>
+    </student>
+    
 </class>

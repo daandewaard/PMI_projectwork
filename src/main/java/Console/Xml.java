@@ -63,18 +63,23 @@ public class Xml {
         return students;
     }
 
-    public static ArrayList<String[]> getStudentGrades(int choice) throws ParserConfigurationException {
-        NodeList studentsList = studentsList();
-        //Node student = studentsList.item(choice);
+    public static Node getStudent(int searchingFor, NodeList studentsList){
         Node student = null;
         for (int i = 0; i < studentsList.getLength(); i++) {
             student = studentsList.item(i);
             int studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
-            if (studentId == choice + 1) {
-                break;
+            if (studentId == searchingFor) {
+                return student;
             }
         }
-        assert student != null;
+
+        return student;
+    }
+
+    public static ArrayList<String[]> getStudentGrades(int choice) throws ParserConfigurationException {
+        NodeList studentsList = studentsList();
+        //Node student = studentsList.item(choice);
+        Node student = getStudent(choice, studentsList);
         NodeList studentGrades = student.getChildNodes();
 
         ArrayList<String[]> grades = new ArrayList<String[]>();
@@ -122,10 +127,6 @@ public class Xml {
 
             Element nodeElement = document.createElement("student");
 
-            /*This isn't the perfect solution yet, will cause problems when a student in the middle of the file
-            gets deleted. Need to look into this, should find the id of the student at the end of the file,
-            or save the most recent id in some kind of file (so that id's will never be re-used)
-             */
             String studentId = "";
             for (int i = 0; i < studentsList.getLength(); i++) {
                 Node student = studentsList.item(i);
@@ -142,17 +143,12 @@ public class Xml {
             documentElement.appendChild(nodeElement);
             document.replaceChild(documentElement, documentElement);
 
-            document.getDocumentElement().normalize();
-
-            Transformer tFormer =
-                    TransformerFactory.newInstance().newTransformer();
-
-            tFormer.setOutputProperty(OutputKeys.METHOD, "xml");
-
-            Source source = new DOMSource(document);
-            Result result = new StreamResult(xmlFile);
-
-            tFormer.transform(source, result);
+            try (FileOutputStream output =
+                         new FileOutputStream("students.xml")) {
+                writeXml(document, output);
+            }catch (IOException | TransformerException e) {
+                e.printStackTrace();
+            }
 
             System.out.println("Succesfully added new student " + name);
 
@@ -164,15 +160,7 @@ public class Xml {
     public static void editStudent(String id, String name, String dob) throws ParserConfigurationException {
         Document doc = getXmlDocument();
         NodeList studentsList = doc.getElementsByTagName("student");
-        Node student = null;
-        int studentId = 0;
-        for (int i = 0; i < studentsList.getLength(); i++) {
-            student = studentsList.item(i);
-            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
-            if (studentId == Integer.parseInt(id) + 1) {
-                break;
-            }
-        }
+        Node student = getStudent(Integer.parseInt(id), studentsList);
         assert student != null;
 
                 NodeList childNodes = student.getChildNodes();
@@ -218,15 +206,7 @@ public class Xml {
     public static void addGrade(String id, String subject, String mark) throws ParserConfigurationException {
         Document doc = getXmlDocument();
         NodeList studentsList = doc.getElementsByTagName("student");
-        Node student = null;
-        int studentId = 0;
-        for (int i = 0; i < studentsList.getLength(); i++) {
-            student = studentsList.item(i);
-            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
-            if (studentId == Integer.parseInt(id)) {
-                break;
-            }
-        }
+        Node student = getStudent(Integer.parseInt(id), studentsList);
         assert student != null;
 
         Element gradeElement = doc.createElement("grade");

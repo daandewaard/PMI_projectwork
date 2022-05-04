@@ -116,7 +116,7 @@ public class Main {
         String choice = choiceInput.nextLine();
         if(!Objects.equals(choice, "x") && !Objects.equals(choice, "X")) {
             int intChoice = Integer.parseInt(choice);
-            ArrayList<String[]> grades = Xml.getStudentGrades(intChoice - 1);
+            ArrayList<String[]> grades = Xml.getStudentGrades(intChoice);
 
             for (int i = 0; i < grades.size(); i++) {
                 System.out.println(grades.get(i)[0] + ": " + grades.get(i)[1]);
