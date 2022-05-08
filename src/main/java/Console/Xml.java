@@ -26,7 +26,6 @@ public class Xml {
         try {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
-            // parse XML file
             DocumentBuilder db = dbf.newDocumentBuilder();
 
             doc = db.parse(new File(FILENAME));
@@ -38,6 +37,7 @@ public class Xml {
         }
         return doc;
     }
+
     public static NodeList studentsList() throws ParserConfigurationException {
         Document doc = getXmlDocument();
 
@@ -78,14 +78,12 @@ public class Xml {
 
     public static ArrayList<String[]> getStudentGrades(int choice) throws ParserConfigurationException {
         NodeList studentsList = studentsList();
-        //Node student = studentsList.item(choice);
         Node student = getStudent(choice, studentsList);
         NodeList studentGrades = student.getChildNodes();
 
         ArrayList<String[]> grades = new ArrayList<String[]>();
 
         for (int j = 0; j < studentGrades.getLength(); j++) {
-            //System.out.println(studentGrades.item(choice).toString());
             Node node = studentGrades.item(j);
             NodeList childNodes = node.getChildNodes();
             String subject = "";
@@ -188,11 +186,8 @@ public class Xml {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-        // The default add many empty new line, not sure why?
-        // https://mkyong.com/java/pretty-print-xml-with-java-dom-and-xslt/
          Transformer transformer = transformerFactory.newTransformer();
 
-        // pretty print
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
 
@@ -229,17 +224,8 @@ public class Xml {
     public static void deleteStudent(String choice) throws ParserConfigurationException {
         Document doc = getXmlDocument();
         NodeList studentsList = doc.getElementsByTagName("student");
-        Node student = null;
-        int studentId = 0;
-        for (int i = 0; i < studentsList.getLength(); i++) {
-            student = studentsList.item(i);
-            studentId = Integer.parseInt(student.getAttributes().getNamedItem("id").getTextContent());
-            if (studentId == Integer.parseInt(choice)) {
-                break;
-            }
-        }
+        Node student = getStudent(Integer.parseInt(choice), studentsList);
         assert student != null;
-
         student.getParentNode().removeChild(student);
 
 
