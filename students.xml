@@ -1,98 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <class>
-                
-    
-    
     <student id="1">
-                                
-        
-        
-        <name>Jon Smith</name>
-                                
-        
-        
-        <dateOfBirth>31-12-2000</dateOfBirth>
-                                
-        
-        
+        <name>John</name>
+        <dateOfBirth>20-02-1999</dateOfBirth>
         <grade>
-                                                
-            
-            
-            <subject>Discrete Maths II</subject>
-                                                
-            
-            
-            <mark>5</mark>
-                                            
-        
-        
-        </grade>
-                                
-        
-        
-        <grade>
-                                                
-            
-            
-            <subject>Methodology of Programming I</subject>
-                                                
-            
-            
-            <mark>4</mark>
-                                            
-        
-        
-        </grade>
-                            
-    
-    
-    </student>
-                
-    
-    
-    <student id="2">
-                                
-        
-        
-        <name>Kai Huckenbeck</name>
-                                
-        
-        
-        <dateOfBirth>10-08-1998</dateOfBirth>
-                                
-        
-        
-        <grade>
-                                                
-            
-            
-            <subject>Discrete Maths II</subject>
-                                                
-            
-            
-            <mark>1</mark>
-                                            
-        
-        
-        </grade>
-                            
-    
-        
-        <grade>
-                        
-            <subject>Calculus II</subject>
-                        
+            <subject>Programming</subject>
             <mark>3</mark>
-                    
         </grade>
-            
+        <grade>
+            <subject>Calculus</subject>
+            <mark>4</mark>
+        </grade>
     </student>
-            
-
-
-    <student id="3">
-        <name>Jan de Waard</name>
-        <dateOfBirth>28-07-2002</dateOfBirth>
+    <student id="2">
+        <name>Chris</name>
+        <dateOfBirth>09-02-2003</dateOfBirth>
+        <grade>
+            <subject>Calculus</subject>
+            <mark>2</mark>
+        </grade>
     </student>
 </class>
